@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>QQList</title>
+	<style type="text/css">
+		/* reset */
+		html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}
+		header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
+		table{border-collapse:collapse;border-spacing:0;}
+		caption,th{text-align:left;font-weight:normal;}
+		html,body,fieldset,img,iframe,abbr{border:0;}
+		i,cite,em,var,address,dfn{font-style:normal;}
+		[hidefocus],summary{outline:0;}
+		li{list-style:none;}
+		h1,h2,h3,h4,h5,h6,small{font-size:100%;}
+		sup,sub{font-size:83%;}
+		pre,code,kbd,samp{font-family:inherit;}
+		q:before,q:after{content:none;}
+		textarea{overflow:auto;resize:none;}
+		label,summary{cursor:default;}
+		a,button{cursor:pointer;}
+		h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
+		del,ins,u,s,a,a:hover{text-decoration:none;}
+		body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\5b8b\4f53;color:#333;outline:0;}
+		body{background:#fff;}
+		a,a:hover{color:#333;}
+		/*layout*/
+		body{font:12px/1.5 "Helvetica Neue",Helvetica,tahoma,Arial,\5FAE\8F6F\96C5\9ED1;}
+		.wrapper{ width: 980px; height:800px; margin: 50px auto; }	
+		.list{width: 260px; height: 800px; border: 1px solid #b7d5df;background: #f0f9fd;}
+		.list h2{position: relative; height: 30px; line-height: 30px; margin-bottom: 0px; padding:0 0 0 20px; border-bottom: 1px solid #b7d5df; background: #d4e7f0 url(./img/arrow_normal.gif) no-repeat left center;}
+
+		
+
+		.list li ul li{height: 30px; line-height: 30px; margin-bottom: 0px; padding:0 0 0 20px; }
+		.list ul{ display: none;}
+		.list .active{background: #d4e7f0 url(./img/arrow_onclick.png) no-repeat left center};
+	</style>
+</head>
+<body>
+	<div class="wrapper ">
+		<ul class="list" id="list">
+			<li>
+				<h2>交易中心</h2>
+				<ul>
+					<li><a href="#">比特币</a></li>
+					<li><a href="#">胜利币</a></li>
+					<li><a href="#">航天币</a></li>
+					<li><a href="#">测试币</a></li>
+				</ul>
+			</li>
+			<li>
+				<h2>安全中心</h2>
+				<ul>
+					<li><a href="#">实名认证</a></li>
+					<li><a href="#">双重认证</a></li>
+					<li><a href="#">绑定手机</a></li>
+				</ul>
+			</li>
+			<li>
+				<h2>帮助中心</h2>
+				<ul>
+					<li><a href="#">关于我们</a></li>
+					<li><a href="#">找回密码</a></li>
+					<li><a href="#">云购商城</a></li>
+				</ul>
+			</li>
+		</ul>	
+	</div>
+	<script type="text/javascript">
+		window.onload = function menuFold(){
+			var oList = document.getElementById('list');
+			var oH2 = document.getElementsByTagName('h2');
+			var oUl = oList.getElementsByTagName('ul');
+			var arrLi = null;
+			for(var i = 0; i < oH2.length; i++){
+				//console.log(oH2[i].firstChild.nodeValue);	
+				//oH2[i].setAttribute("index",i);
+				oH2[i].index = i;
+				/*
+				oH2[i].onclick = function(){
+					//console.log(oUl[this.getAttribute('index')]);
+					//oUl[this.index].setAttribute("style","display: block;");
+
+					if(this.getAttribute('class') == ''){
+						oUl[this.getAttribute('index')].setAttribute('style','display: block');
+						this.setAttribute('class','active');
+						
+					}else{
+						oUl[this.getAttribute('index')].setAttribute('style','display: none');
+						this.setAttribute('class','');
+					}
+					//bug 要点击2次
+				}*/
+				
+				oH2[i].onclick = function(){
+					//console.log(oUl[this.getAttribute('index')]);
+					//oUl[this.index].setAttribute("style","display: block;");
+
+					if(this.className == ''){
+						oUl[this.index].style.display = 'block';
+						this.className = 'active';
+						
+					}else{
+						oUl[this.index].style.display = 'none';
+						this.className = '';
+					}
+				}
+				//返回列表项的下一个同胞
+				//console.log(get_nextsibling(oH2[i]).childNodes);
+				// arrLi = get_nextsibling(oH2[i]).childNodes; //所有节点列表
+				//console.log(arrLi.length);
+				var arrLi = get_nextsibling(oH2[i]).childNodes;
+				
+				
+				/*
+				for(var j = 0; j < get_nextsibling(oH2[i]).childNodes.length; j++){
+					if(get_nextsibling(oH2[i]).childNodes[j].nodeType == 1){
+						
+						console.log(get_nextsibling(oH2[i]).childNodes[j].nodeType);
+						//arrLi.push();
+
+					}else{
+						return false;
+					}	
+				}
+				*/
+				
+			}
+
+		}
+		
+		console.log(arrLi);
+		function get_nextsibling(n)
+		{
+			var x=n.nextSibling;
+			while (x.nodeType!=1){
+		 		x=x.nextSibling;
+			}
+			return x;
+		}
+	</script>
+</body>
+</html>
